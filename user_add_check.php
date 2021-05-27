@@ -18,35 +18,37 @@
         $user_pass= htmlspecialchars($user_pass,ENT_QUOTES,'UTF-8');
         $user_pass2= htmlspecialchars($user_pass2,ENT_QUOTES,'UTF-8');
 
-        if($user_name=='')
-        {
+        $check = false;
+        if($user_name==''){
             print'ユーザー名が入力されていません。<br/>';
-        }
-        else
-        {
+            $check = true;
+        }else{
             print'ユーザー名：';
             print $user_name;
             print'<br/>';
         }
-
-        if($user_pass=='')
-        {
+        if($user_mail==''){
+            print'メールアドレスが入力されていません<br/>';
+            $check = true;
+        }else{
+            print'メールアドレス：';
+            print $user_mail;
+            print'<br/>';
+        }
+        if($user_pass==''){
             print'パスワードが入力されていません。<br/>';
+            $check = true;
         }
-
-        if($user_pass!=$user_pass2)
-        {
+        if($user_pass!=$user_pass2){
             print'パスワードが一致しません。<br/>';
+            $check = true;
         }
-
-        if($user_name==''||$user_pass==''|$user_pass!=$user_pass2)
-        {
+        if($check){
             print'<form>';
             print'<input type="button" onclick="history.back()" value="戻る">';
             print'<form>';
-        }
-        else
-        {
+        }else{
+            print'入力した内容に間違いはございませんか？';
             $user_pass=md5($user_pass);
             print'<form method="post" action="user_add_done.php">';
             print'<input type="hidden" name="name" value="'.$user_name.'">';
