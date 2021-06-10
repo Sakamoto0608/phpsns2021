@@ -1,3 +1,7 @@
+<?php
+session_start();
+if(isset($_SESSION['login'])) print 'ログインされています';
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -11,12 +15,12 @@
                 <div class="row">
                     <!--投稿などを表示するメイン画面-->
                     <div class="col-10">
-                        <!--投稿-->
+
                     </div>
                     <!--サイドバー-->
                     <div class="col-2">
                         <a href="user_add.php">サインアップ</a><br />
-                        <a href="user_login.html">サインイン</a>
+                        <a href="user_login.php">サインイン</a>
                     </div>
                 </div>
             </div>
