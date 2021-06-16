@@ -16,9 +16,9 @@
         $user_mail = $_POST['mail'];
         $user_pass = $_POST['pass'];
 
-        $user_name = htmlspecialchars($user_name,ENT_QUOTES,'UTF-8');
-        $user_mail = htmlspecialchars($user_mail,ENT_QUOTES,'UTF-8');
-        $user_pass = htmlspecialchars($user_pass,ENT_QUOTES,'UTF-8');
+        //$user_name = htmlspecialchars($user_name,ENT_QUOTES,'UTF-8');
+        //$user_mail = htmlspecialchars($user_mail,ENT_QUOTES,'UTF-8');
+        //$user_pass = htmlspecialchars($user_pass,ENT_QUOTES,'UTF-8');
 
         $dsn = 'mysql:dbname=phpsns2021;host=localhost;charset=utf8';
         $user = 'root';

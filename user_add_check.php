@@ -15,10 +15,10 @@
         $user_pass=$_POST['pass'];
         $user_pass2=$_POST['pass2'];
 
-        $user_name= htmlspecialchars($user_name,ENT_QUOTES,'UTF-8');
-        $user_mail= htmlspecialchars($user_mail,ENT_QUOTES,'UTF-8');
-        $user_pass= htmlspecialchars($user_pass,ENT_QUOTES,'UTF-8');
-        $user_pass2= htmlspecialchars($user_pass2,ENT_QUOTES,'UTF-8');
+        //$user_name= htmlspecialchars($user_name,ENT_QUOTES,'UTF-8');
+        //$user_mail= htmlspecialchars($user_mail,ENT_QUOTES,'UTF-8');
+        //$user_pass= htmlspecialchars($user_pass,ENT_QUOTES,'UTF-8');
+        //$user_pass2= htmlspecialchars($user_pass2,ENT_QUOTES,'UTF-8');
 
         $check = false;
         if($user_name==''){
