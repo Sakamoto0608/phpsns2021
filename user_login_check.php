@@ -9,7 +9,7 @@ try{
     $dbh = new PDO($dsn,$user,$password);
     $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-    $sql='SELECT password FROM mst_user WHERE mailaddress=?'; //未完成
+    $sql='SELECT * FROM mst_user WHERE mailaddress=?';
     $stmt = $dbh->prepare($sql);
     $data[] = $mail;
     $stmt->execute($data);
@@ -19,6 +19,8 @@ try{
     if($rec['password'] == $pass){
         session_start();
         $_SESSION['login'] = 1;
+        $_SESSION['userID'] = $rec['userID'];
+        $_SESSION['name'] = $rec['name'];
         header('Location:index.php');
         exit();
     }else{

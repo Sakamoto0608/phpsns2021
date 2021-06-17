@@ -10,6 +10,9 @@ if(isset($_SESSION['login'])) print 'ログインされています';
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     </head>
     <body>
+        <header>
+            <a href="tweet.php">投稿する</a><br />
+        </header>
         <main>
             <div class="container-fluid">
                 <div class="row">
