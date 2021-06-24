@@ -20,6 +20,7 @@ try{
         session_start();
         $_SESSION['login'] = 1;
         $_SESSION['userID'] = $rec['userID'];
+        $_SESSION['nickname'] = $rec['nickname'];
         $_SESSION['name'] = $rec['name'];
         header('Location:index.php');
         exit();

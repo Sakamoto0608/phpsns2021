@@ -28,11 +28,14 @@
         //この1行は静的プリペアードステートメントに関するものです。教科書通りではありません。
         //$dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 
-        $sql = 'INSERT INTO mst_user(name,mailaddress,password) VALUES (?,?,?)';
+        $sql = 'INSERT INTO mst_user(name,mailaddress,password,nickname,profile) VALUES (?,?,?,?,?)';
         $stmt = $dbh->prepare($sql);
         $data[] = $user_name;
         $data[] = $user_mail;
         $data[] = $user_pass;
+        $data[] = $user_name;
+        $data[] = "よろしくお願いします。";
+
         $stmt->execute($data);
         $dbh = null;
 
