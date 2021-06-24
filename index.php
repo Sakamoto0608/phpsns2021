@@ -18,7 +18,29 @@ if(isset($_SESSION['login'])) print 'ログインされています';
                 <div class="row">
                     <!--投稿などを表示するメイン画面-->
                     <div class="col-10">
-
+                        <p>みんなの投稿</p>
+                        <?php
+                        try{
+                            $dsn = 'mysql:dbname=phpsns2021;host=localhost;charset=utf8';
+                            $user = 'root';
+                            $password = '';
+                            $dbh = new PDO($dsn,$user,$password);
+                            $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+                            $sql='SELECT * FROM post JOIN mst_user ON post.userID = mst_user.userID';
+                            $stmt = $dbh->prepare($sql);
+                            $stmt->execute();
+                            $dbh = null;
+                            foreach ($stmt as $rec){
+                                print'<div class="card">';
+                                print'<h4 class="card-title"><a href="profile.php?userID='.$rec['userID'].'">'.$rec['nickname'].'</a></h4>';
+                                print'<p class="card-text">'.$rec['text'].'</p>';
+                                print'</div>';
+                            }
+                        }catch(Exception $e){
+                            print 'ただいま障害によりご迷惑をおかけしています。';
+                            exit('接続エラー :' . $e->getMessage());
+                        }
+                        ?>
                     </div>
                     <!--サイドバー-->
                     <div class="col-2">
