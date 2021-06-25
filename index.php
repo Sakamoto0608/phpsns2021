@@ -47,6 +47,7 @@ if(isset($_SESSION['login'])) print 'ログインされています';
                         <?php
                         if(isset($_SESSION['login'])){
                             print'<a href="profile.php?userID='.$_SESSION['userID'].'">自分のプロフィール</a><br />';
+                            print'<a href="user_signout_check.php">サインアウト</a>';
                         }else{
                             print'<a href="user_add.php">サインアップ</a><br />
                             <a href="user_login.php">サインイン</a>';
