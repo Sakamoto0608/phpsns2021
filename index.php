@@ -26,7 +26,7 @@ if(isset($_SESSION['login'])) print 'ログインされています';
                             $password = '';
                             $dbh = new PDO($dsn,$user,$password);
                             $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-                            $sql='SELECT * FROM post JOIN mst_user ON post.userID = mst_user.userID';
+                            $sql='SELECT * FROM post JOIN mst_user ON post.userID = mst_user.userID ORDER BY postID';
                             $stmt = $dbh->prepare($sql);
                             $stmt->execute();
                             $dbh = null;
@@ -34,6 +34,7 @@ if(isset($_SESSION['login'])) print 'ログインされています';
                                 print'<div class="card">';
                                 print'<h4 class="card-title"><a href="profile.php?userID='.$rec['userID'].'">'.$rec['nickname'].'</a></h4>';
                                 print'<p class="card-text">'.$rec['text'].'</p>';
+                                print'<p class="card-text">投稿日時'.$rec['date'].'</p>';
                                 print'</div>';
                             }
                         }catch(Exception $e){

@@ -23,11 +23,12 @@
         //この1行は静的プリペアードステートメントに関するものです。教科書通りではありません。
         //$dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 
-        $sql = 'INSERT INTO post(userID,text,image) VALUES (?,?,?)';
+        $sql = 'INSERT INTO post(userID,text,image,date) VALUES (?,?,?,?)';
         $stmt = $dbh->prepare($sql);
         $data[] = $_SESSION['userID'];
         $data[] = $posttext;
         $data[] = "";
+        $data[] = date("Y-m-d H:i:s");
         $stmt->execute($data);
         $dbh = null;
 
