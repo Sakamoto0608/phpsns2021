@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(isset($_SESSION['login'])) print 'ログインされています<br/>';
+require "function.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -11,6 +11,9 @@ if(isset($_SESSION['login'])) print 'ログインされています<br/>';
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     </head>
     <body>
+        <header>
+        <?php headerGenerate(); ?>
+        </header>
         <?php
         try{
             $dsn = 'mysql:dbname=phpsns2021;host=localhost;charset=utf8';

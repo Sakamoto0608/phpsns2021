@@ -10,9 +10,8 @@
     <body>
         <header>
             <?php
-            if(isset($_SESSION['login'])){
-                print $_SESSION['name'].'さんでログインしています';
-            }else{
+            require "function.php";headerGenerate();
+            if(!isset($_SESSION['login'])){
                 print'ログインされていません。';
                 print'<br/><a href="user_login.php">ログインページへ</a>';
                 exit();

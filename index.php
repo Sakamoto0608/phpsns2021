@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(isset($_SESSION['login'])) print 'ログインされています';
+require "function.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -11,7 +11,7 @@ if(isset($_SESSION['login'])) print 'ログインされています';
     </head>
     <body>
         <header>
-            <a href="tweet.php">投稿する</a><br />
+            <?php headerGenerate(); ?>
         </header>
         <main>
             <div class="container-fluid">

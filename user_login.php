@@ -7,6 +7,9 @@
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     </head>
     <body>
+        <header>
+        <?php require "function.php";headerGenerate(); ?>
+        </header>
         ユーザーログイン<br />
         <br />
         <form method="post" action="user_login_check.php">
