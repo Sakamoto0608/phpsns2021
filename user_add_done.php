@@ -12,8 +12,7 @@
         </header>
     <?php
 
-    try
-    {
+    try{
 
         $user_name = $_POST['name'];
         $user_mail = $_POST['mail'];
@@ -46,11 +45,13 @@
         print 'さんを追加しました。<br />';
 
     }
-    catch(Exception $e)
-    {
+    catch(PDOException $pdoex){
+        if($pdoex->getCode() == 23000){
+            print'そのメールアドレスは既に登録されています。';
+        }else{
         print 'ただいま障害によりご迷惑をおかけしています。';
         exit('接続エラー :' . $e->getMessage());
-
+        }
     }
 
     ?>
