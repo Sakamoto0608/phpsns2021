@@ -47,10 +47,11 @@
     }
     catch(PDOException $pdoex){
         if($pdoex->getCode() == 23000){
-            print'そのメールアドレスは既に登録されています。';
+            $match_email="/Duplicate entry '\S*' for key 'mailaddress'/m";
+            if(preg_match($match_email,$pdoex->getMessage())) print'そのメールアドレスは既に登録されています。';
         }else{
-        print 'ただいま障害によりご迷惑をおかけしています。';
-        exit('接続エラー :' . $e->getMessage());
+            print 'ただいま障害によりご迷惑をおかけしています。';
+            exit('接続エラー :' . $pdoex->getMessage());
         }
     }
 
