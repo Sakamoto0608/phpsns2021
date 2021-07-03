@@ -25,17 +25,16 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- テーブルの構造 `mst_user`
+-- テーブルの構造 `post`
 --
 
-CREATE TABLE `mst_user` (
+CREATE TABLE `post` (
+  `postID` int(255) NOT NULL,
   `userID` int(255) NOT NULL,
-  `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `mailaddress` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-  `nickname` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `profile` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `flag` tinyint(1) NOT NULL
+  `text` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `date` datetime NOT NULL,
+  `deleteDay` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -43,21 +42,31 @@ CREATE TABLE `mst_user` (
 --
 
 --
--- Indexes for table `mst_user`
+-- Indexes for table `post`
 --
-ALTER TABLE `mst_user`
-  ADD PRIMARY KEY (`userID`),
-  ADD UNIQUE KEY `mailaddress` (`mailaddress`);
+ALTER TABLE `post`
+  ADD PRIMARY KEY (`postID`),
+  ADD KEY `userID` (`userID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `mst_user`
+-- AUTO_INCREMENT for table `post`
 --
-ALTER TABLE `mst_user`
-  MODIFY `userID` int(255) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `post`
+  MODIFY `postID` int(255) NOT NULL AUTO_INCREMENT;
+
+--
+-- ダンプしたテーブルの制約
+--
+
+--
+-- テーブルの制約 `post`
+--
+ALTER TABLE `post`
+  ADD CONSTRAINT `post_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `mst_user` (`userID`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
