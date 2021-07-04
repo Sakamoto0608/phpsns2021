@@ -45,13 +45,17 @@ require "function.php";
                     </div>
                     <!--サイドバー-->
                     <div class="col-2">
+                        <p class="h4">アカウント管理</p>
                         <?php
                         if(isset($_SESSION['login'])){
-                            print'<a href="profile.php?userID='.$_SESSION['userID'].'">自分のプロフィール</a><br />';
-                            print'<a href="user_signout_check.php">サインアウト</a>';
+                            print'<div class="list-group">
+                            <a href="profile.php?userID='.$_SESSION['userID'].'" class="list-group-item list-group-item-action">自分のプロフィール</a>
+                            <a href="user_signout_check.php" class="list-group-item list-group-item-action">サインアウト</a>';
                         }else{
-                            print'<a href="user_add.php">サインアップ</a><br />
-                            <a href="user_login.php">サインイン</a>';
+                            print'<div class="list-group">
+                            <a href="user_add.php" class="list-group-item list-group-item-action">サインアップ</a>
+                            <a href="user_login.php" class="list-group-item list-group-item-action">サインイン</a>
+                            </div>';
                         }
                         ?>
                     </div>
