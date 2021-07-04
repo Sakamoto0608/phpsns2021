@@ -41,8 +41,7 @@
         $stmt->execute($data);
         $dbh = null;
 
-        print $user_name;
-        print 'さんを追加しました。<br />';
+        print'登録が正常に終了しました。<br>メインページから再度ログインをお願いします。';
 
     }
     catch(PDOException $pdoex){
@@ -57,7 +56,7 @@
 
     ?>
 
-    <a href="index.php">戻る</a>
+    <br><a href="index.php">戻る</a>
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
