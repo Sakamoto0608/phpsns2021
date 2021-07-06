@@ -28,6 +28,10 @@ require "function.php";
             $stmt->execute($data);
             $dbh = null;
             $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+            if(empty($rec)){
+                print'不正なリクエストです。<br><a href="index.php">戻る</a>';
+                return;
+            }
         }catch(Exception $e){
             print 'ただいま障害によりご迷惑をおかけしています。';
             exit('接続エラー :' . $e->getMessage());
