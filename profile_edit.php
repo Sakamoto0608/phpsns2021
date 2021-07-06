@@ -1,3 +1,15 @@
+<?php
+session_start();
+$check = false;
+if(!isset($_SESSION['userID'])){
+    print'不正なリクエストです。<br><a href="index.php">戻る</a>';
+    return;
+}
+if(!($_SESSION['userID'] == $_GET['userID'])){
+    print'不正なリクエストです。<br><a href="index.php">戻る</a>';
+    return;
+}
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,10 +24,10 @@
         </header>
         <form method="post" action="profile_edit_check.php">
             変更後のニックネーム<br />
-            <input type="text" name="nickname"><br />
+            <input type="text" name="nickname"><br/>
             変更後の自己紹介文<br />
-            <input type="text" name="profile"><br />
-            <br />
+            <input type="text" name="profile"><br/>
+            <br/>
             <?php print'<input type="hidden" name="userID" value="'.$_GET['userID'].'">'; ?>
             <input type="submit" value="変更する">
         </form>

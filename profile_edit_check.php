@@ -1,5 +1,15 @@
 <?php
 try{
+    session_start();
+    $check = false;
+    if(!isset($_SESSION['userID'])){
+        print'不正なリクエストです。<br><a href="index.php">戻る</a>';
+        return;
+    }
+    if(!($_SESSION['userID'] == $_POST['userID'])){
+        print'不正なリクエストです。<br><a href="index.php">戻る</a>';
+        return;
+    }
     $nickname = $_POST['nickname'];
     $profile = $_POST['profile'];
     $userID = $_POST['userID'];
