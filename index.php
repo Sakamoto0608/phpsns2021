@@ -20,13 +20,17 @@ require "function.php";
                     <div class="col-10">
                         <p>みんなの投稿</p>
                         <?php
+                        $page = 1;
+                        if(isset($_GET['page'])) $page = $_GET['page'];
+                        $min = ($page - 1)*10;
+                        $max = $page * 10;
                         try{
                             $dsn = 'mysql:dbname=phpsns2021;host=localhost;charset=utf8';
                             $user = 'root';
                             $password = '';
                             $dbh = new PDO($dsn,$user,$password);
                             $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-                            $sql='SELECT * FROM post JOIN mst_user ON post.userID = mst_user.userID ORDER BY postID';
+                            $sql='SELECT * FROM post JOIN mst_user ON post.userID = mst_user.userID ORDER BY postID desc LIMIT '.$min.','.$max;
                             $stmt = $dbh->prepare($sql);
                             $stmt->execute();
                             $dbh = null;
@@ -41,6 +45,7 @@ require "function.php";
                             print 'ただいま障害によりご迷惑をおかけしています。';
                             exit('接続エラー :' . $e->getMessage());
                         }
+                        pageGenerate("index.php",$page);
                         ?>
                     </div>
                     <!--サイドバー-->
