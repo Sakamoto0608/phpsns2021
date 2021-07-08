@@ -29,4 +29,26 @@ $header = <<<EOD
 EOD;
 print $header;
 }
+function pageGenerate($path,$page){
+$prev = $page - 1;
+$prevlink = '<li class="page-item"><a class="page-link" href="'.$path.'?page='.$prev.'">'.$prev.'</a></li>';
+//1ページ目の場合1番目の数字と2番目の数字がともに１となってしまうので片方を削除する
+if($prev <= 0){
+  $prev = 1;
+  $prevlink = "";
+}
+$next = $page + 1;
+$pagination = <<<EOD
+<nav aria-label="ページネーション">
+<ul class="pagination justify-content-center">
+<li class="page-item"><a class="page-link" href="$path?page=$prev">前</a></li>
+$prevlink
+<li class="page-item"><a class="page-link">$page</a></li>
+<li class="page-item"><a class="page-link" href="$path?page=$next">$next</a></li>
+<li class="page-item"><a class="page-link" href="$path?page=$next">次</a></li>
+</ul>
+</nav>
+EOD;
+print $pagination;
+}
 ?>
