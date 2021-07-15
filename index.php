@@ -45,7 +45,7 @@ require "function.php";
                             print 'ただいま障害によりご迷惑をおかけしています。';
                             exit('接続エラー :' . $e->getMessage());
                         }
-                        pageGenerate("index.php",$page);
+                        pageGenerate("index.php",$page,"");
                         ?>
                     </div>
                     <!--サイドバー-->
