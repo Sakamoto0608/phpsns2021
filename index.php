@@ -41,6 +41,9 @@ require "function.php";
                                 print'<p class="card-text">投稿日時'.$rec['date'].'</p>';
                                 print'</div>';
                             }
+                            if(empty($rec)){
+                                print'投稿がありません。';
+                            }
                         }catch(Exception $e){
                             print 'ただいま障害によりご迷惑をおかけしています。';
                             exit('接続エラー :' . $e->getMessage());
