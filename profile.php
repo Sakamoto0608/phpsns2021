@@ -15,6 +15,7 @@ require "function.php";
         <?php headerGenerate(); ?>
         </header>
         <?php
+        //ユーザー情報
         try{
             $dsn = 'mysql:dbname=phpsns2021;host=localhost;charset=utf8';
             $user = 'root';
@@ -26,7 +27,6 @@ require "function.php";
             $userID = $_GET['userID'];
             $data[] = $userID;
             $stmt->execute($data);
-            $dbh = null;
             $rec = $stmt->fetch(PDO::FETCH_ASSOC);
             if(empty($rec)){
                 print'不正なリクエストです。<br><a href="index.php">戻る</a>';
@@ -40,8 +40,36 @@ require "function.php";
         print'ニックネーム：'.$rec['nickname'].'<br/>';
         print'自己紹介文：'.$rec['profile'].'<br/>';
         if(isset($_SESSION['userID'])){
-            if($_SESSION['userID'] == $userID) print'<a href="profile_edit.php?userID='.$userID.'">編集する</a>';
+            if($_SESSION['userID'] == $userID) print'<a href="profile_edit.php?userID='.$userID.'">編集する</a><br/><br/>';
         }
+        $rec = null;
+        //投稿表示
+        $page = 1;
+        if(isset($_GET['page'])) $page = $_GET['page'];
+        $min = ($page - 1)*10;
+        $max = $page * 10;
+        print'<p class="h2">このユーザーの投稿</p>';
+        try{
+            $sql2='SELECT * FROM post JOIN mst_user ON post.userID = mst_user.userID WHERE mst_user.userID = ? ORDER BY postID desc LIMIT '.$min.','.$max;
+            $stmt2 = $dbh->prepare($sql2);
+            $data2[] = $userID;
+            $stmt2->execute($data2);
+            $dbh = null;
+        }catch(Exception $e){
+            print 'ただいま障害によりご迷惑をおかけしています。';
+            exit('接続エラー :' . $e->getMessage());
+        }
+        foreach ($stmt2 as $rec){
+            print'<div class="card">';
+            print'<h4 class="card-title">'.$rec['nickname'].'</h4>';
+            print'<p class="card-text">'.$rec['text'].'</p>';
+            print'<p class="card-text">投稿日時'.$rec['date'].'</p>';
+            print'</div>';
+        }
+        if(empty($rec)){
+            print'投稿がありません。';
+        }
+        pageGenerate("profile.php",$page,"userID=".$userID);
         ?>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
