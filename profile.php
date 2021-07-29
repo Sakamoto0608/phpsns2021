@@ -43,6 +43,7 @@ require "function.php";
             if($_SESSION['userID'] == $userID) print'<a href="profile_edit.php?userID='.$userID.'">編集する</a><br/><br/>';
         }
         $rec = null;
+        $data = null;
         //投稿表示
         $page = 1;
         if(isset($_GET['page'])) $page = $_GET['page'];
@@ -50,16 +51,16 @@ require "function.php";
         $max = $page * 10;
         print'<p class="h2">このユーザーの投稿</p>';
         try{
-            $sql2='SELECT * FROM post JOIN mst_user ON post.userID = mst_user.userID WHERE mst_user.userID = ? ORDER BY postID desc LIMIT '.$min.','.$max;
-            $stmt2 = $dbh->prepare($sql2);
-            $data2[] = $userID;
-            $stmt2->execute($data2);
+            $sql='SELECT * FROM post JOIN mst_user ON post.userID = mst_user.userID WHERE mst_user.userID = ? ORDER BY postID desc LIMIT '.$min.','.$max;
+            $stmt = $dbh->prepare($sql);
+            $data[] = $userID;
+            $stmt->execute($data);
             $dbh = null;
         }catch(Exception $e){
             print 'ただいま障害によりご迷惑をおかけしています。';
             exit('接続エラー :' . $e->getMessage());
         }
-        foreach ($stmt2 as $rec){
+        foreach ($stmt as $rec){
             print'<div class="card">';
             print'<h4 class="card-title">'.$rec['nickname'].'</h4>';
             print'<p class="card-text">'.$rec['text'].'</p>';
