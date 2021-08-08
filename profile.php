@@ -39,8 +39,36 @@ require "function.php";
         print'ユーザー名：'.$rec['name'].'<br/>';
         print'ニックネーム：'.$rec['nickname'].'<br/>';
         print'自己紹介文：'.$rec['profile'].'<br/>';
+        $isLogin = false;
+        $isMyself = false;
         if(isset($_SESSION['userID'])){
-            if($_SESSION['userID'] == $userID) print'<a href="profile_edit.php?userID='.$userID.'">編集する</a><br/><br/>';
+            $isLogin = true;
+            if($_SESSION['userID'] == $userID){
+                print'<a href="profile_edit.php?userID='.$userID.'">編集する</a><br/><br/>';
+                $isMyself = true;
+            }
+        }
+        $rec = null;
+        $data = null;
+        //フォローボタン表示
+        if($isLogin&&(!$isMyself)){
+            try{
+                $sql='SELECT COUNT(*) FROM follow WHERE userID =? AND followuserID =? AND isdelete IS NULL';
+                $stmt = $dbh->prepare($sql);
+                $followuserID = $userID;
+                $data[] = $_SESSION['userID'];
+                $data[] = $followuserID;
+                $stmt->execute($data);
+                $rec = $stmt->fetch(PDO::FETCH_ASSOC);
+                if(!($rec['COUNT(*)'] == 1)){
+                    print'<a href="follow.php?followuserID='.$followuserID.'">フォローする</a>';
+                }else{
+                    print'このユーザーはフォロー済みです。';
+                }
+            }catch(Exception $e){
+                print 'ただいま障害によりご迷惑をおかけしています。';
+                exit('接続エラー :' . $e->getMessage());
+            }
         }
         $rec = null;
         $data = null;
