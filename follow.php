@@ -24,6 +24,10 @@ require "function.php";
                 print'不正なリクエストです。<br/><a href="javascript:history.back()">戻る</a>';
                 return;
             }else $followuserID = $_GET['followuserID'];
+            if($followuserID == $userID){
+                print'自分をフォローすることは出来ません。<br/><a href="javascript:history.back()">戻る</a>';
+                return;
+            }
             try{
                 $dsn = 'mysql:dbname=phpsns2021;host=localhost;charset=utf8';
                 $user = 'root';
