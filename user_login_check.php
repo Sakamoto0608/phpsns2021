@@ -9,7 +9,7 @@ try{
     $dbh = new PDO($dsn,$user,$password);
     $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-    $sql='SELECT * FROM mst_user WHERE mailaddress=?';
+    $sql='SELECT * FROM mst_user WHERE mailaddress=? AND flag=false';
     $stmt = $dbh->prepare($sql);
     $data[] = $mail;
     $stmt->execute($data);
