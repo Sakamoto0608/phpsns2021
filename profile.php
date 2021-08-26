@@ -22,7 +22,7 @@ require "function.php";
             $password = '';
             $dbh = new PDO($dsn,$user,$password);
             $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-            $sql='SELECT * FROM mst_user WHERE userID =?';
+            $sql='SELECT * FROM mst_user WHERE userID =? AND flag = false';
             $stmt = $dbh->prepare($sql);
             $userID = $_GET['userID'];
             $data[] = $userID;
@@ -79,7 +79,7 @@ require "function.php";
         $max = $page * 10;
         print'<p class="h2">このユーザーの投稿</p>';
         try{
-            $sql='SELECT * FROM post JOIN mst_user ON post.userID = mst_user.userID WHERE mst_user.userID = ? ORDER BY postID desc LIMIT '.$min.','.$max;
+            $sql='SELECT * FROM post JOIN mst_user ON post.userID = mst_user.userID WHERE mst_user.userID = ? AND mst_user.flag = false AND post.deleteDay IS NULL ORDER BY postID desc LIMIT '.$min.','.$max;
             $stmt = $dbh->prepare($sql);
             $data[] = $userID;
             $stmt->execute($data);

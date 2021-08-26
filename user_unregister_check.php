@@ -15,7 +15,7 @@ try{
     $dbh = new PDO($dsn,$user,$password);
     $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-    $sql='SELECT password FROM mst_user WHERE userID=?';
+    $sql='SELECT password FROM mst_user WHERE userID=? AND flag=false';
     
     $stmt = $dbh->prepare($sql);
     $data[] = $userID;
