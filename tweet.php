@@ -21,10 +21,10 @@
         <main>
             投稿ページ<br />
             <br />
-            <form method="post" action="tweet_check.php">
+            <form method="post" action="tweet_check.php" enctype="multipart/form-data">
                 投稿したいことを書いてみよう！<br/>
                 <textarea name="posttext" rows="4" cols="40"></textarea><br/>
-                <!--画像貼付は未実装-->
+                <input type="file" name="image" accept="image/*">
                 <input type="button" onclick="history.back()" value="戻る">
                 <input type="submit" value="投稿">
             </form>
