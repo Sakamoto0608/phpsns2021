@@ -30,15 +30,24 @@ require "function.php";
                             $password = '';
                             $dbh = new PDO($dsn,$user,$password);
                             $dbh->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-                            $sql='SELECT * FROM post JOIN mst_user ON post.userID = mst_user.userID ORDER BY postID desc LIMIT '.$min.','.$max;
+                            $sql='SELECT * FROM post 
+                            JOIN mst_user ON post.userID = mst_user.userID
+                            LEFT JOIN image ON post.imageID = image.imageID
+                            ORDER BY postID desc LIMIT '.$min.','.$max;
                             $stmt = $dbh->prepare($sql);
                             $stmt->execute();
                             $dbh = null;
                             foreach ($stmt as $rec){
                                 print'<div class="card">';
+                                //画像の処理
+                                if(isset($rec['path'])){
+                                    print'<img class="card-img-top" src="'.$rec['path'].'">';
+                                }
+                                print'<div class="card-body">';
                                 print'<h4 class="card-title"><a href="profile.php?userID='.$rec['userID'].'">'.$rec['nickname'].'</a></h4>';
                                 print'<p class="card-text">'.$rec['text'].'</p>';
                                 print'<p class="card-text">投稿日時'.$rec['date'].'</p>';
+                                print'</div>';
                                 print'</div>';
                             }
                             if(empty($rec)){

@@ -79,7 +79,10 @@ require "function.php";
         $max = $page * 10;
         print'<p class="h2">このユーザーの投稿</p>';
         try{
-            $sql='SELECT * FROM post JOIN mst_user ON post.userID = mst_user.userID WHERE mst_user.userID = ? AND mst_user.flag = false AND post.deleteDay IS NULL ORDER BY postID desc LIMIT '.$min.','.$max;
+            $sql='SELECT * FROM post 
+            JOIN mst_user ON post.userID = mst_user.userID 
+            LEFT JOIN image ON post.imageID = image.imageID
+            WHERE mst_user.userID = ? AND mst_user.flag = false AND post.deleteDay IS NULL ORDER BY postID desc LIMIT '.$min.','.$max;
             $stmt = $dbh->prepare($sql);
             $data[] = $userID;
             $stmt->execute($data);
@@ -90,9 +93,15 @@ require "function.php";
         }
         foreach ($stmt as $rec){
             print'<div class="card">';
+            //画像の処理
+            if(isset($rec['path'])){
+                print'<img class="card-img-top" src="'.$rec['path'].'">';
+            }
+            print'<div class="card-body">';
             print'<h4 class="card-title">'.$rec['nickname'].'</h4>';
             print'<p class="card-text">'.$rec['text'].'</p>';
             print'<p class="card-text">投稿日時'.$rec['date'].'</p>';
+            print'</div>';
             print'</div>';
         }
         if(empty($rec)){
