@@ -39,7 +39,6 @@
                     exit('接続エラー :' . $e->getMessage());
                 }
             }else{
-                echo'failed';
             }
         }
         $posttext = $_POST['posttext'];
