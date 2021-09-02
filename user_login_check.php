@@ -26,7 +26,7 @@ try{
         exit();
     }else{
         print 'メールアドレス、もしくはパスワードが間違っています。';
-        print '<a href="index.php">戻る</a>';
+        print '<a href="user_login.php">戻る</a>';
     }
 }catch(Exception $e){
         print 'ただいま障害によりご迷惑をおかけしています。';
