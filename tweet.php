@@ -19,14 +19,26 @@
             ?>
         </header>
         <main>
-            投稿ページ<br />
-            <br />
+            <p class="h1">投稿</p>
+            <br>
             <form method="post" action="tweet_check.php" enctype="multipart/form-data">
-                投稿したいことを書いてみよう！<br/>
-                <textarea name="posttext" rows="4" cols="40"></textarea><br/>
-                <input type="file" name="image" accept="image/*">
-                <input type="button" onclick="history.back()" value="戻る">
-                <input type="submit" value="投稿">
+                <div class="form-group">
+                    <label for="posttext">投稿内容</label>
+                    <textarea name="posttext" class="form-control" rows="4" cols="40"></textarea><br>
+                </div>
+                <div class="form-group">
+                    <label for="image">貼付画像</label>
+                    <input type="file" class="form-control-file" name="image" accept="image/*"><br>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-6">
+                        <input type="button" class="form-control" onclick="history.back()" value="戻る">
+                    </div>
+                    <div class="form-group col-6">
+                        <input type="submit" class="form-control" value="投稿">
+                    </div>
+                </div>
+
             </form>
         </main>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
