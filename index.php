@@ -17,8 +17,8 @@ require "function.php";
             <div class="container-fluid">
                 <div class="row">
                     <!--投稿などを表示するメイン画面-->
-                    <div class="col-10">
-                        <p>みんなの投稿</p>
+                    <div class="col-sm-8">
+                        <p class="h1">みんなの投稿</p>
                         <?php
                         $page = 1;
                         if(isset($_GET['page'])) $page = $_GET['page'];
@@ -61,7 +61,7 @@ require "function.php";
                         ?>
                     </div>
                     <!--サイドバー-->
-                    <div class="col-2">
+                    <div class="col-sm-4">
                         <p class="h4">アカウント管理</p>
                         <?php
                         if(isset($_SESSION['login'])){
