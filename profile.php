@@ -29,7 +29,7 @@ require "function.php";
             $stmt->execute($data);
             $rec = $stmt->fetch(PDO::FETCH_ASSOC);
             if(empty($rec)){
-                print'不正なリクエストです。<br><a href="index.php">戻る</a>';
+                print'そのユーザーは存在しないか退会した可能性があります。<br/><a href="index.php">戻る</a>';
                 return;
             }
         }catch(Exception $e){
